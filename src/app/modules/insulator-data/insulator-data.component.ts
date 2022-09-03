@@ -35,14 +35,14 @@ export class InsulatorDataComponent implements OnInit {
       insulatorTypeId: [null, [Validators.required]],
       insulatorCodeId: [null, [Validators.required]],
 
-      electricCharge: [null, [Validators.required]],
-      creepageDistance: [null, [Validators.required]],
-      step: [null, [Validators.required]],
-      diameter: [null, [Validators.required]],
-      TF_Dry: [null, [Validators.required]],
-      TF_Rain: [null, [Validators.required]],
-      TF_Ray: [null, [Validators.required]],
-      insulatorWeight: [null, [Validators.required]],
+      // electricCharge: [null, [Validators.required]],
+      // creepageDistance: [null, [Validators.required]],
+      // step: [null, [Validators.required]],
+      // diameter: [null, [Validators.required]],
+      // TF_Dry: [null, [Validators.required]],
+      // TF_Rain: [null, [Validators.required]],
+      // TF_Ray: [null, [Validators.required]],
+      // insulatorWeight: [null, [Validators.required]],
     });
 
     this.form.get('insulatorTypeId').valueChanges.subscribe((data) => {
@@ -52,15 +52,24 @@ export class InsulatorDataComponent implements OnInit {
 
       this.form.patchValue({
         insulatorCodeId: null,
-        electricCharge: null,
-        creepageDistance: null,
-        step: null,
-        diameter: null,
-        TF_Dry: null,
-        TF_Rain: null,
-        TF_Ray: null,
-        insulatorWeight: null,
+        // electricCharge: null,
+        // creepageDistance: null,
+        // step: null,
+        // diameter: null,
+        // TF_Dry: null,
+        // TF_Rain: null,
+        // TF_Ray: null,
+        // insulatorWeight: null,
       });
+
+      this.electricCharge = null;
+      this.creepageDistance = null;
+      this.step = null;
+      this.diameter = null;
+      this.TF_Dry = null;
+      this.TF_Rain = null;
+      this.TF_Ray = null;
+      this.insulatorWeight = null;
     });
 
     this.form
@@ -74,16 +83,25 @@ export class InsulatorDataComponent implements OnInit {
           (m) => m.id == data
         );
 
-        this.form.patchValue({
-          electricCharge: foundMatchinCodeWithData.electricCharge,
-          creepageDistance: foundMatchinCodeWithData.creepageDistance,
-          step: foundMatchinCodeWithData.step,
-          diameter: foundMatchinCodeWithData.diameter,
-          TF_Dry: foundMatchinCodeWithData.TF_Dry,
-          TF_Rain: foundMatchinCodeWithData.TF_Rain,
-          TF_Ray: foundMatchinCodeWithData.TF_Ray,
-          insulatorWeight: foundMatchinCodeWithData.insulatorWeight,
-        });
+        this.electricCharge = foundMatchinCodeWithData.electricCharge;
+        this.creepageDistance = foundMatchinCodeWithData.creepageDistance;
+        this.step = foundMatchinCodeWithData.step;
+        this.diameter = foundMatchinCodeWithData.diameter;
+        this.TF_Dry = foundMatchinCodeWithData.TF_Dry;
+        this.TF_Rain = foundMatchinCodeWithData.TF_Rain;
+        this.TF_Ray = foundMatchinCodeWithData.TF_Ray;
+        this.insulatorWeight = foundMatchinCodeWithData.insulatorWeight;
+
+        // this.form.patchValue({
+        //   electricCharge: foundMatchinCodeWithData.electricCharge,
+        //   creepageDistance: foundMatchinCodeWithData.creepageDistance,
+        //   step: foundMatchinCodeWithData.step,
+        //   diameter: foundMatchinCodeWithData.diameter,
+        //   TF_Dry: foundMatchinCodeWithData.TF_Dry,
+        //   TF_Rain: foundMatchinCodeWithData.TF_Rain,
+        //   TF_Ray: foundMatchinCodeWithData.TF_Ray,
+        //   insulatorWeight: foundMatchinCodeWithData.insulatorWeight,
+        // });
       });
 
     this.storageService.insulatorData
@@ -91,6 +109,21 @@ export class InsulatorDataComponent implements OnInit {
         map((data) => {
           if (data) {
             this.form.patchValue(data);
+
+            /*
+            * Tambien asignamos las variables temporales en base a insulatorTypeId y insulatorCodeId
+             */
+            const foundMatchingCode = INSULATOR_DATA_BASE.find(t => t.id == data.insulatorTypeId).codes.find(m => m.id == data.insulatorCodeId)
+           
+            this.electricCharge = foundMatchingCode.electricCharge;
+            this.creepageDistance = foundMatchingCode.creepageDistance;
+            this.step = foundMatchingCode.step;
+            this.diameter = foundMatchingCode.diameter;
+            this.TF_Dry = foundMatchingCode.TF_Dry;
+            this.TF_Rain = foundMatchingCode.TF_Rain;
+            this.TF_Ray = foundMatchingCode.TF_Ray;
+            this.insulatorWeight = foundMatchingCode.insulatorWeight;
+
           }
         })
       )
