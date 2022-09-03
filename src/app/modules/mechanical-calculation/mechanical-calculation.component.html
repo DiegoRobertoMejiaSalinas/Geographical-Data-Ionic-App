@@ -7,4 +7,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <form [formGroup]="form">
+    <ion-item class="mt-5">
+      <ion-label position="floating">Velocidad del viento (Km/h)</ion-label>
+      <ion-input type="number" formControlName="windSpeed"></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating"
+        >Peso del Herraje de la Cadena (daN)</ion-label
+      >
+      <ion-input
+        type="number"
+        formControlName="chainHardwareWeight"
+      ></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Número de conductores por fase</ion-label>
+      <ion-input
+        type="number"
+        formControlName="conductorsPerPhaseNumber"
+      ></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Esfuerzo vertical transmitido por los conductores del aislador (daN)</ion-label>
+      <ion-input type="number" formControlName="verticalStressTransmitted"></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Tensión máxima horizontal (daN)</ion-label>
+      <ion-input type="number" formControlName="maximumHorizontalTension"></ion-input>
+    </ion-item>
+
+    <ion-button (click)="saveForm()" [disabled]="form.invalid" color="success" class="mt-7" expand="block">
+      <ion-icon slot="start" name="save"></ion-icon> Guardar
+    </ion-button>
+  </form>
+</ion-content>
