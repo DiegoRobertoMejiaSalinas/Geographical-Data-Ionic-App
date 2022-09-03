@@ -11,7 +11,7 @@
   <form [formGroup]="form">
     <ion-item class="mt-5">
       <ion-label position="floating">Tipo de Aislador</ion-label>
-      <ion-select formControlName="insulatorTypeId">
+      <ion-select okText="Seleccionar" cancelText="Cancelar" formControlName="insulatorTypeId">
         <ion-select-option
           *ngFor="let insulatorItem of insulatorList"
           [value]="insulatorItem.id"

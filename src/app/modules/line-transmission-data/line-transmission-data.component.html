@@ -11,7 +11,7 @@
   <form [formGroup]="form">
     <ion-item class="mt-5">
       <ion-label position="floating">Tensión Máxima (KV)</ion-label>
-      <ion-select formControlName="maximumTensionId">
+      <ion-select okText="Seleccionar" cancelText="Cancelar" formControlName="maximumTensionId">
         <ion-select-option
           *ngFor="let maximumTensionItem of maximumTensionList"
           [value]="maximumTensionItem.id"
@@ -52,7 +52,7 @@
 
     <ion-item class="mt-3">
       <ion-label position="floating">Nivel de contaminación</ion-label>
-      <ion-select formControlName="contaminationLevelId">
+      <ion-select okText="Seleccionar" cancelText="Cancelar" formControlName="contaminationLevelId">
         <ion-select-option
           *ngFor="let contaminationItem of contaminationLevelList"
           [value]="contaminationItem.id"
@@ -63,7 +63,7 @@
 
     <ion-item class="mt-3">
       <ion-label position="floating">Intensidad de precipitación</ion-label>
-      <ion-select formControlName="precipitationIntensityId">
+      <ion-select okText="Seleccionar" cancelText="Cancelar" formControlName="precipitationIntensityId">
         <ion-select-option
           *ngFor="let precipitationItem of precipitationIntensityList"
           [value]="precipitationItem.id"

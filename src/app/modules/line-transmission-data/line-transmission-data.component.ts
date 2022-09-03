@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { CONTAMINATION_LEVEL_BASE, FC_RAIN_BASE, LINE_TRANSMISION_DATA_BASE } from 'src/app/shared/lineTransmissionData.cst';
+import { CONTAMINATION_LEVEL_BASE } from 'src/app/shared/contaminationLevel.cst';
+import { FC_RAIN_BASE } from 'src/app/shared/fcRain.cst';
+import {  LINE_TRANSMISION_DATA_BASE } from 'src/app/shared/lineTransmissionData.cst';
 
 @Component({
   selector: 'app-line-transmission-data',

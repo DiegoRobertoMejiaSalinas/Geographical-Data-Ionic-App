@@ -27,10 +27,31 @@
     </ion-item>
     <ion-item class="mt-3">
       <ion-label position="floating">Temperatura (°C)</ion-label>
-      <ion-input type="number" formControlName="temperature"></ion-input>
+      <ion-input
+        (keypress)="numberOnly($event)"
+        type="number"
+        formControlName="temperature"
+      ></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Humedad Relativa (%)</ion-label>
+      <ion-select okText="Seleccionar" cancelText="Cancelar" formControlName="relativeHumidity">
+        <ion-select-option
+          *ngFor="let humidityRelativeItem of humidityRelativeList"
+          [value]="humidityRelativeItem.id"
+        >
+          {{ humidityRelativeItem.name }}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
-    <ion-button (click)="saveForm()" [disabled]="form.invalid" color="success" class="mt-7" expand="block">
+    <ion-button
+      (click)="saveForm()"
+      [disabled]="form.invalid"
+      color="success"
+      class="mt-7"
+      expand="block"
+    >
       <ion-icon slot="start" name="save"></ion-icon>
       Guardar
     </ion-button>
