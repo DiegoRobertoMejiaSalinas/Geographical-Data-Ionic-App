@@ -7,4 +7,75 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <form [formGroup]="form">
+    <ion-item class="mt-5">
+      <ion-label position="floating">Tensión Máxima (KV)</ion-label>
+      <ion-select formControlName="maximumTensionId">
+        <ion-select-option
+          *ngFor="let maximumTensionItem of maximumTensionList"
+          [value]="maximumTensionItem.id"
+          >{{ maximumTensionItem.name }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="mt-3">
+      <ion-label position="floating"
+        >Nivel básico de conmutación (KV)</ion-label
+      >
+      <ion-select
+        [disabled]="!conmutationBasicLevelList.length"
+        formControlName="conmutationBasicLevelId"
+      >
+        <ion-select-option
+          *ngFor="let conmutationBasicLevelItem of conmutationBasicLevelList"
+          [value]="conmutationBasicLevelItem.id"
+          >{{ conmutationBasicLevelItem.name }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="mt-3">
+      <ion-label position="floating">Nivel básico de aislamiento</ion-label>
+      <ion-select
+        [disabled]="!isolationBasicLevelList.length"
+        formControlName="isolationBasicLevelId"
+      >
+        <ion-select-option
+          *ngFor="let isolationcBasicLevelItem of isolationBasicLevelList"
+          [value]="isolationcBasicLevelItem.id"
+          >{{ isolationcBasicLevelItem.name }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="mt-3">
+      <ion-label position="floating">Nivel de contaminación</ion-label>
+      <ion-select formControlName="contaminationLevelId">
+        <ion-select-option
+          *ngFor="let contaminationItem of contaminationLevelList"
+        ></ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="mt-3">
+      <ion-label position="floating">Intensidad de precipitación</ion-label>
+      <ion-select formControlName="precipitationIntensityId">
+        <ion-select-option
+          *ngFor="let precipitationItem of precipitationIntensityList"
+        ></ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button
+      [disabled]="form.invalid"
+      (click)="saveForm()"
+      color="success"
+      class="mt-7"
+      expand="block"
+    >
+      <ion-icon slot="start" name="save"></ion-icon> Guardar
+    </ion-button>
+  </form>
+</ion-content>
