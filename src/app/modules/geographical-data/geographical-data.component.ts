@@ -23,6 +23,13 @@ export class GeographicalDataComponent implements OnInit {
       altitude: [null, [Validators.required]],
       temperature: [null, [Validators.required]],
     });
+
+    /*
+    * Vamos a corroborar en el StorageService que si existe ya un valor existente lo vamos a asignar en el form
+     */
+    if(this.storageService.getGeographicalData()){
+      this.form.patchValue(this.storageService.getGeographicalData())
+    }
   }
 
   saveForm() {
