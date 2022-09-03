@@ -13,10 +13,10 @@
       <ion-label position="floating">Tipo de Aislador</ion-label>
       <ion-select formControlName="insulatorTypeId">
         <ion-select-option
-          *ngFor="let insulator of insulatorList"
-          [value]="insulator.id"
+          *ngFor="let insulatorItem of insulatorList"
+          [value]="insulatorItem.id"
         >
-          {{ insulator.name }}
+          {{ insulatorItem.name }}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -28,10 +28,10 @@
         formControlName="insulatorCodeId"
       >
         <ion-select-option
-          *ngFor="let insulatorSingle of insulatorCodeList"
-          [value]="insulatorSingle.id"
+          *ngFor="let insulatorCodeItem of insulatorCodeList"
+          [value]="insulatorCodeItem.id"
         >
-          {{ insulatorSingle.name }}
+          {{ insulatorCodeItem.name }}
         </ion-select-option>
       </ion-select>
     </ion-item>

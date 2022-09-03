@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { LINE_TRANSMISION_DATA_BASE } from 'src/app/shared/lineTransmissionData.cst';
+import { CONTAMINATION_LEVEL_BASE, FC_RAIN_BASE, LINE_TRANSMISION_DATA_BASE } from 'src/app/shared/lineTransmissionData.cst';
 
 @Component({
   selector: 'app-line-transmission-data',
@@ -16,8 +16,8 @@ export class LineTransmissionDataComponent implements OnInit {
   maximumTensionList = LINE_TRANSMISION_DATA_BASE;
   conmutationBasicLevelList = [];
   isolationBasicLevelList = [];
-  contaminationLevelList = [];
-  precipitationIntensityList = [];
+  contaminationLevelList = CONTAMINATION_LEVEL_BASE;
+  precipitationIntensityList = FC_RAIN_BASE
 
   constructor(
     private readonly fb: FormBuilder,

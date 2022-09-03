@@ -55,7 +55,9 @@
       <ion-select formControlName="contaminationLevelId">
         <ion-select-option
           *ngFor="let contaminationItem of contaminationLevelList"
-        ></ion-select-option>
+          [value]="contaminationItem.id"
+          >{{ contaminationItem.name }}</ion-select-option
+        >
       </ion-select>
     </ion-item>
 
@@ -64,7 +66,9 @@
       <ion-select formControlName="precipitationIntensityId">
         <ion-select-option
           *ngFor="let precipitationItem of precipitationIntensityList"
-        ></ion-select-option>
+          [value]="precipitationItem.id"
+          >{{ precipitationItem.name }}</ion-select-option
+        >
       </ion-select>
     </ion-item>
 
