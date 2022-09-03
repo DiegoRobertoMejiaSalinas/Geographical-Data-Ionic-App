@@ -1,0 +1,7 @@
+{
+  "name": "untelsInsulator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
