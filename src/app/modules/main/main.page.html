@@ -51,6 +51,7 @@
       Generar Reporte</ion-button
     >
     <ion-label
+      *ngIf="!isFirstComplete || !isSecondComplete || !isThirdComplete || !isForthComplete"
       ><p class="hint">
         Se podrá generar el reporte cuando complete todos los formularios
       </p></ion-label
