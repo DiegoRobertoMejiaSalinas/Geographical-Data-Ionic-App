@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class GeographicalDataComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
+    private readonly router: Router
   ) {
     this.form = this.fb.group({
       department: ['', [Validators.required]],
@@ -26,10 +28,7 @@ export class GeographicalDataComponent implements OnInit {
   saveForm() {
     this.storageService.setGeographicalData(this.form.getRawValue());
 
-    this.storageService.geographicalData.subscribe((data) => {
-      console.log({ data });
-      console.log(this.storageService.geographicalData);
-    });
+    this.router.navigate(["/"])
   }
 
   ngOnInit() {}
