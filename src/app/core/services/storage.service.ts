@@ -77,6 +77,55 @@ export class StorageService {
         JSON.parse(geographicalDataIsCompleteFromLocalStorage)
       );
     }
+
+    const insulatorDataFromLocalStorage = localStorage.getItem('insulatorData');
+    if (insulatorDataFromLocalStorage) {
+      this.insulatorData$.next(JSON.parse(insulatorDataFromLocalStorage));
+    }
+
+    const insulatorDataIsCompleteFromLocalStorage = localStorage.getItem(
+      'insulatorDataIsComplete'
+    );
+    if (insulatorDataIsCompleteFromLocalStorage) {
+      this.insulatorDataIsComplete$.next(
+        JSON.parse(insulatorDataIsCompleteFromLocalStorage)
+      );
+    }
+
+    const mechanicalCalculationDataFromLocalStorage = localStorage.getItem(
+      'mechanicalCalculationData'
+    );
+    if (mechanicalCalculationDataFromLocalStorage) {
+      this.mechanicalCalculation$.next(
+        JSON.parse(mechanicalCalculationDataFromLocalStorage)
+      );
+    }
+
+    const mechanicalCalculationDataIsCompleteFromLocalStorage =
+      localStorage.getItem('mechanicalCalculationIsComplete');
+    if (mechanicalCalculationDataIsCompleteFromLocalStorage) {
+      this.mechanicalCalculationIsComplete$.next(
+        JSON.parse(mechanicalCalculationDataIsCompleteFromLocalStorage)
+      );
+    }
+
+    const lineTransmissionDataFromLocalStorage = localStorage.getItem(
+      'lineTransmissionData'
+    );
+    if (lineTransmissionDataFromLocalStorage) {
+      this.lineTransmissionData$.next(
+        JSON.parse(lineTransmissionDataFromLocalStorage)
+      );
+    }
+
+    const lineTransmissionDataIsCompleteFromLocalStorage = localStorage.getItem(
+      'lineTransmissionDataIsComplete'
+    );
+    if (lineTransmissionDataIsCompleteFromLocalStorage) {
+      this.lineTransmissionDataIsComplete$.next(
+        JSON.parse(lineTransmissionDataIsCompleteFromLocalStorage)
+      );
+    }
   }
 
   getGeographicalData() {
@@ -95,6 +144,8 @@ export class StorageService {
 
   setInsulatorData(data: any) {
     this.insulatorData$.next(data);
+
+    localStorage.setItem('insulatorData', JSON.stringify(data));
   }
 
   getMechanicalCalculationData() {
@@ -103,6 +154,8 @@ export class StorageService {
 
   setMechanicalCalculationData(data: any) {
     this.mechanicalCalculation$.next(data);
+
+    localStorage.setItem('mechanicalCalculationData', JSON.stringify(data));
   }
 
   getLineTransmissionData() {
@@ -111,6 +164,8 @@ export class StorageService {
 
   setLineTransmissionData(data: any) {
     this.lineTransmissionData$.next(data);
+
+    localStorage.setItem('lineTransmissionData', JSON.stringify(data));
   }
 
   setGeographicalDataIsComplete(data: boolean) {
@@ -125,6 +180,11 @@ export class StorageService {
 
   setLineTransmissionDataIsComplete(data: boolean) {
     this.lineTransmissionDataIsComplete$.next(data);
+
+    localStorage.setItem(
+      'lineTransmissionDataIsComplete',
+      JSON.stringify(data)
+    );
   }
 
   getLineTransmissionDataIsComplete() {
@@ -133,6 +193,8 @@ export class StorageService {
 
   setInsulatorDataIsComplete(data: boolean) {
     this.insulatorDataIsComplete$.next(data);
+
+    localStorage.setItem('insulatorDataIsComplete', JSON.stringify(data));
   }
 
   getInsulatorDataIsComplete() {
@@ -141,6 +203,11 @@ export class StorageService {
 
   setMechanicalCalculationIsComplete(data: boolean) {
     this.mechanicalCalculationIsComplete$.next(data);
+
+    localStorage.setItem(
+      'mechanicalCalculationIsComplete',
+      JSON.stringify(data)
+    );
   }
 
   getMechanicalCalculationIsComplete() {
