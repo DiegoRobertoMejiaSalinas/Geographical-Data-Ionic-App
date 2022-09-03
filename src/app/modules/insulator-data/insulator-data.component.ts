@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -471,7 +471,8 @@ export class InsulatorDataComponent implements OnInit {
           TF_Rain: 45,
           TF_Ray: 110,
           insulatorWeight: 4.7,
-        },{
+        },
+        {
           id: 5,
           name: 'E-100P-146',
           electricCharge: 100,
@@ -734,6 +735,16 @@ export class InsulatorDataComponent implements OnInit {
       insulatorWeight: [null, [Validators.required]],
     });
 
+    this.storageService.insulatorData
+      .pipe(
+        map((data) => {
+          if (data) {
+            this.form.patchValue(data);
+          }
+        })
+      )
+      .subscribe();
+
     this.form.get('insulatorTypeId').valueChanges.subscribe((data) => {
       this.insulatorCodeList = this.insulatorList.find(
         (t) => t.id == data
@@ -780,6 +791,7 @@ export class InsulatorDataComponent implements OnInit {
 
   saveForm() {
     this.storageService.setInsulatorData(this.form.getRawValue());
+    this.storageService.setInsulatorDataIsComplete(true);
 
     this.router.navigate(['/']);
   }
