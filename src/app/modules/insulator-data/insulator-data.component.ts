@@ -735,16 +735,7 @@ export class InsulatorDataComponent implements OnInit {
       insulatorWeight: [null, [Validators.required]],
     });
 
-    this.storageService.insulatorData
-      .pipe(
-        map((data) => {
-          if (data) {
-            this.form.patchValue(data);
-          }
-        })
-      )
-      .subscribe();
-
+ 
     this.form.get('insulatorTypeId').valueChanges.subscribe((data) => {
       this.insulatorCodeList = this.insulatorList.find(
         (t) => t.id == data
@@ -785,6 +776,16 @@ export class InsulatorDataComponent implements OnInit {
           insulatorWeight: foundMatchinCodeWithData.insulatorWeight,
         });
       });
+
+      this.storageService.insulatorData
+      .pipe(
+        map((data) => {
+          if (data) {
+            this.form.patchValue(data);
+          }
+        })
+      )
+      .subscribe();
   }
 
   ngOnInit() {}
