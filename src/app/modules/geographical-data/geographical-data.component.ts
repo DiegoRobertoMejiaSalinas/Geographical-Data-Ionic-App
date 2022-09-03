@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
@@ -25,17 +26,28 @@ export class GeographicalDataComponent implements OnInit {
     });
 
     /*
-    * Vamos a corroborar en el StorageService que si existe ya un valor existente lo vamos a asignar en el form
+     * Vamos a corroborar en el StorageService que si existe ya un valor existente lo vamos a asignar en el form
      */
-    if(this.storageService.getGeographicalData()){
-      this.form.patchValue(this.storageService.getGeographicalData())
-    }
+    this.storageService.geographicalData
+      .pipe(
+        map((data) => {
+          console.log({data})
+          if (data) {
+            this.form.patchValue(data);
+          }
+        })
+      )
+      .subscribe();
+    // if(this.storageService.getGeographicalData()){
+    //   this.form.patchValue(this.storageService.getGeographicalData())
+    // }
   }
 
   saveForm() {
     this.storageService.setGeographicalData(this.form.getRawValue());
+    this.storageService.setGeographicalDataIsComplete(true)
 
-    this.router.navigate(["/"])
+    this.router.navigate(['/']);
   }
 
   ngOnInit() {}
