@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -6,10 +8,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPageComponent implements OnInit {
+  isFirstComplete = false;
+  isSecondComplete = false;
+  isThirdComplete = false;
+  isForthComplete = false;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private readonly storageService: StorageService,
+    private alertController: AlertController
+  ) {
+    this.storageService.geographicalDataIsComplete.subscribe((data) => {
+      console.log({ data });
+      this.isFirstComplete = data;
+    });
   }
 
+  ngOnInit() {}
+
+  async cleanForms() {
+    const alert = await this.alertController.create({
+      header: 'Se eliminará todos los formularios que esten guardados.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.storageService.cleanAllForms();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 }
