@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Datos Geográficos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-item class="mt-5">
+      <ion-label position="floating">Departamento</ion-label>
+      <ion-input type="text" formControlName="department"></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Provincia</ion-label>
+      <ion-input type="text" formControlName="province"></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Distrito</ion-label>
+      <ion-input type="text" formControlName="district"></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Altitud (M.S.N.M.)</ion-label>
+      <ion-input type="number" formControlName="altitude"></ion-input>
+    </ion-item>
+    <ion-item class="mt-3">
+      <ion-label position="floating">Temperatura (°C)</ion-label>
+      <ion-input type="number" formControlName="temperature"></ion-input>
+    </ion-item>
+
+    <ion-button (click)="saveForm()" [disabled]="form.invalid" color="success" class="mt-7" expand="block">
+      <ion-icon slot="start" name="save"></ion-icon>
+      Guardar
+    </ion-button>
+  </form>
+</ion-content>
