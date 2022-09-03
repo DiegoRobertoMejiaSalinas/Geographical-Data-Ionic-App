@@ -18,8 +18,19 @@ export class MainPageComponent implements OnInit {
     private alertController: AlertController
   ) {
     this.storageService.geographicalDataIsComplete.subscribe((data) => {
-      console.log({ data });
       this.isFirstComplete = data;
+    });
+
+    this.storageService.lineTransmissionDataIsComplete.subscribe((data) => {
+      this.isSecondComplete = data;
+    });
+
+    this.storageService.insulatorDataIsComplete.subscribe((data) => {
+      this.isThirdComplete = data;
+    });
+
+    this.storageService.mechanicalCalculationIsComplete.subscribe((data) => {
+      this.isForthComplete = data;
     });
   }
 
