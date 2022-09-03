@@ -29,10 +29,25 @@ export class StorageService {
 
     this.mechanicalCalculation$ = new BehaviorSubject(null);
     this.mechanicalCalculation = this.mechanicalCalculation$.asObservable();
+
+    /*
+     * Vamos a corroborar que si existe en LocalStorage, de ser asi lo asignamos en las respectivas BehaviorSubject
+     */
+    const geographicalDataFromLocalStorage =
+      localStorage.getItem('geographicalData');
+    if (geographicalDataFromLocalStorage) {
+      this.geographicalData$.next(JSON.parse(geographicalDataFromLocalStorage));
+    }
+  }
+
+  getGeographicalData() {
+    return this.geographicalData$.getValue();
   }
 
   setGeographicalData(data: any) {
     this.geographicalData$.next(data);
+
+    localStorage.setItem('geographicalData', JSON.stringify(data));
   }
 
   setInsulatorData(data: any) {
