@@ -24,3 +24,77 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+//* For Loop para margin y padding
+@for $i from 1 through 20 {
+  .mt-#{$i} {
+    margin-top: .3rem * $i;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: .3rem * $i;
+  }
+
+  .ml-#{$i} {
+    margin-left: .3rem * $i;
+  }
+
+  .mr-#{$i} {
+    margin-right: .3rem * $i;
+  }
+
+  .my-#{$i} {
+    margin-top: .15rem * $i;
+    margin-bottom: .15rem * $i;
+  }
+
+  .mx-#{$i} {
+    margin-left: .15rem * $i;
+    margin-right: .15rem * $i;
+  }
+
+  .m-#{$i}{
+    margin-top: .15rem * $i;
+    margin-bottom: .15rem * $i;
+    margin-left: .15rem * $i;
+    margin-right: .15rem * $i;
+  }
+
+  .pt-#{$i} {
+    padding-top: .3rem * $i;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: .3rem * $i;
+  }
+
+  .pl-#{$i} {
+    padding-left: .3rem * $i;
+  }
+
+  .pr-#{$i} {
+    padding-right: .3rem * $i;
+  }
+
+  .py-#{$i} {
+    padding-top: .15rem * $i;
+    padding-bottom: .15rem * $i;
+  }
+
+  .px-#{$i} {
+    padding-left: .15rem * $i;
+    padding-right: .15rem * $i;
+  }
+
+  .p-#{$i}{
+    padding-top: .15rem * $i;
+    padding-bottom: .15rem * $i;
+    padding-left: .15rem * $i;
+    padding-right: .15rem * $i;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
