@@ -38,7 +38,7 @@
       <ion-select okText="Seleccionar" cancelText="Cancelar" formControlName="relativeHumidity">
         <ion-select-option
           *ngFor="let humidityRelativeItem of humidityRelativeList"
-          [value]="humidityRelativeItem.id"
+          [value]="humidityRelativeItem.value"
         >
           {{ humidityRelativeItem.name }}
         </ion-select-option>
