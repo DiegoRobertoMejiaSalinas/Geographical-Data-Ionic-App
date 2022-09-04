@@ -88,23 +88,41 @@ export class MainPageComponent implements OnInit {
       this.file
         .checkFile(this.file.dataDirectory, 'access.log')
         .then(async (doesExist) => {
+        
 
-          const toast = await this.toastController.create({
-            message: `${doesExist}`,
-            duration: 3000,
-            position: 'bottom',
-            buttons: [
-              {
-                text: 'Cerrar',
-                role: 'cancel',
-              },
-            ],
-          });
-    
-          await toast.present();
-
-          if(doesExist){
-            this.fileOpener.open(this.file.dataDirectory + "access.log", 'text/plain');
+          if (doesExist) {
+            this.fileOpener
+              .open(this.file.dataDirectory + 'access.log', 'text/plain')
+              .then(async () => {
+                const toast = await this.toastController.create({
+                  message: `File is opened`,
+                  duration: 3000,
+                  position: 'bottom',
+                  buttons: [
+                    {
+                      text: 'Cerrar',
+                      role: 'cancel',
+                    },
+                  ],
+                });
+      
+                await toast.present();
+              })
+              .catch(async (e) => {
+                const toast = await this.toastController.create({
+                  message: `Error: ${e}`,
+                  duration: 3000,
+                  position: 'bottom',
+                  buttons: [
+                    {
+                      text: 'Cerrar',
+                      role: 'cancel',
+                    },
+                  ],
+                });
+      
+                await toast.present();
+              });
           }
 
           console.log('doesExist : ' + doesExist);
