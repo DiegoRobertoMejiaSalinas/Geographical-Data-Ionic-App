@@ -66,7 +66,6 @@ export class ProcessService {
    TCF_RayTypeImpulse:number                                                     //* X
    insulatorsNeededResult: number                                               //* A_1 Aisladores Necesitarios
 
-   @ViewChild('invoice') invoiceElement!: ElementRef;
 
    constructor(private readonly storageService:StorageService){
         /*

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProcessService } from 'src/app/core/services/process.service';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File, IWriteOptions } from '@ionic-native/file/ngx';
+import JSPDF from 'jspdf';
+import domtoimage from 'dom-to-image';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +22,9 @@ export class MainPageComponent implements OnInit {
     private readonly storageService: StorageService,
     private alertController: AlertController,
     private readonly processService: ProcessService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private file: File,
+    private fileOpener: FileOpener
   ) {
     this.storageService.geographicalDataIsComplete.subscribe((data) => {
       this.isFirstComplete = data;
@@ -63,11 +69,63 @@ export class MainPageComponent implements OnInit {
     await alert.present();
   }
 
+  async testPdf() {
+    const pdfBlock = document.getElementById('print-wrapper');
+
+    const options = {
+      background: 'white',
+      height: pdfBlock.clientWidth,
+      width: pdfBlock.clientHeight,
+    };
+
+    const fileUrl = await domtoimage.toPng(pdfBlock, options);
+
+    console.log({ fileUrl });
+    var doc = new JSPDF('p', 'mm', 'a4');
+    doc.addImage(fileUrl, 'PNG', 10, 10, 240, 180);
+
+    let docRes = doc.output();
+    let buffer = new ArrayBuffer(docRes.length);
+    let array = new Uint8Array(buffer);
+    for (var i = 0; i < docRes.length; i++) {
+      array[i] = docRes.charCodeAt(i);
+    }
+
+    console.log({ array });
+
+    const directory = this.file.dataDirectory;
+    const fileName = 'user-data.pdf';
+
+    let optionsTwo: IWriteOptions = {
+      replace: true,
+    };
+
+    console.log(this.file)
+
+    console.log(directory)
+
+    const booleanResult = await this.file.checkFile(directory, fileName);
+
+    console.log({ booleanResult });
+
+    const result = await this.file.writeFile(
+      directory,
+      fileName,
+      buffer,
+      optionsTwo
+    );
+
+    console.log('File generated' + JSON.stringify(result));
+    this.fileOpener
+      .open(this.file.dataDirectory + fileName, 'application/pdf')
+      .then(() => console.log('File is exported'))
+      .catch((e) => console.log(e));
+  }
+
   async generateReport() {
     try {
-      this.processService.mainFunction()
+      this.processService.mainFunction();
     } catch (error) {
-  
       const toast = await this.toastController.create({
         message: error.message,
         duration: 3000,
@@ -75,8 +133,8 @@ export class MainPageComponent implements OnInit {
         buttons: [
           {
             text: 'Cerrar',
-            role: 'cancel'
-          }
+            role: 'cancel',
+          },
         ],
       });
 
