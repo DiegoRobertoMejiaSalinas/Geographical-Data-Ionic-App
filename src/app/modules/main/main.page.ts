@@ -84,11 +84,44 @@ export class MainPageComponent implements OnInit {
       });
 
       await toast.present();
-      this.file.writeExistingFile(
-        this.file.dataDirectory,
-        'access.log',
-        'Hola mundo'
-      );
+
+      this.file
+        .checkFile(this.file.dataDirectory, 'access.log')
+        .then(async (doesExist) => {
+
+          const toast = await this.toastController.create({
+            message: `${doesExist}`,
+            duration: 3000,
+            position: 'bottom',
+            buttons: [
+              {
+                text: 'Cerrar',
+                role: 'cancel',
+              },
+            ],
+          });
+    
+          await toast.present();
+
+          console.log('doesExist : ' + doesExist);
+          return this.file.writeExistingFile(
+            this.file.dataDirectory,
+            'access.log',
+            'HOLAA'
+          );
+        })
+        .catch((err) => {
+          return this.file
+            .createFile(this.file.dataDirectory, 'access.log', false)
+            .then((FileEntry) =>
+              this.file.writeExistingFile(
+                this.file.dataDirectory,
+                'access.log',
+                'HOLAA'
+              )
+            )
+            .catch((err) => console.log("Couldn't create file"));
+        });
     } catch (e) {
       console.log(e);
     }
