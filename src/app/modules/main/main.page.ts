@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+import { ProcessService } from 'src/app/core/services/process.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class MainPageComponent implements OnInit {
 
   constructor(
     private readonly storageService: StorageService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private readonly processService: ProcessService,
+    private toastController: ToastController
   ) {
     this.storageService.geographicalDataIsComplete.subscribe((data) => {
       this.isFirstComplete = data;
@@ -58,5 +61,26 @@ export class MainPageComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async generateReport() {
+    try {
+      this.processService.mainFunction()
+    } catch (error) {
+  
+      const toast = await this.toastController.create({
+        message: error.message,
+        duration: 3000,
+        position: 'bottom',
+        buttons: [
+          {
+            text: 'Cerrar',
+            role: 'cancel'
+          }
+        ],
+      });
+
+      await toast.present();
+    }
   }
 }

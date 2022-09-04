@@ -69,52 +69,54 @@ export class ProcessService {
         * Ahora seteamos los valores que declaramos antes en base a los del Storage
         */
         this.storageService.geographicalData.subscribe(data => {
-            this.altitude = data.altitude
-            this.temperature = data.temperature
-            this.relativeHumidity = data.relativeHumidity
+            this.altitude = data?.altitude
+            this.temperature = data?.temperature
+            this.relativeHumidity = data?.relativeHumidity
             //* Aqui definimos el valor de una variable que depende de otras dos
-            this.intersectionValue = FC_HUMIDITY.find(valueObject => valueObject.relativeHumidityValue == data.relativeHumidity && valueObject.temperatureValue == data.temperature).resultValue
+            this.intersectionValue = data && data.relativeHumidity && data.temperature ? FC_HUMIDITY.find(valueObject => valueObject.relativeHumidityValue == data?.relativeHumidity && valueObject.temperatureValue == data?.temperature).resultValue : null
         })
 
          this.storageService.lineTransmissionData.subscribe(data => {
-            this.maximumTension = LINE_TRANSMISION_DATA_BASE.find(t => t.id == data.maximumTensionId).value
+            this.maximumTension = data?.maximumTensionId ? LINE_TRANSMISION_DATA_BASE.find(t => t.id == data?.maximumTensionId).value : null
             
-            const foundConmutationBasicLevel = LINE_TRANSMISION_DATA_BASE.find(t => t.id == data.maximumTensionId)
-            .conmutationBasicLevelList.find(m => m.id == data.conmutationBasicLevelId)
+            const foundConmutationBasicLevel = data?.maximumTensionId ? LINE_TRANSMISION_DATA_BASE.find(t => t.id == data?.maximumTensionId) 
+            .conmutationBasicLevelList.find(m => m.id == data?.conmutationBasicLevelId) : null
 
-            this.conmutationBasicLevel = foundConmutationBasicLevel.value
+            this.conmutationBasicLevel = foundConmutationBasicLevel?.value
 
-            const foundIsolationBasicLevel = foundConmutationBasicLevel.isolationBasicLevelsList.find(o=> o.id == data.isolationBasicLevelId)
-            this.isolationBasicLevel = foundIsolationBasicLevel.value
+            const foundIsolationBasicLevel = foundConmutationBasicLevel?.isolationBasicLevelsList.find(o=> o.id == data?.isolationBasicLevelId)
+            this.isolationBasicLevel = foundIsolationBasicLevel?.value
 
             //* Aqui definimos el valor de una variable que depende del resultado de una anterior
-            this.criticalDistance= foundIsolationBasicLevel.criticalDistanceValue
+            this.criticalDistance= foundIsolationBasicLevel?.criticalDistanceValue
 
-            this.contaminationLevel = CONTAMINATION_LEVEL_BASE.find(t => t.id == data.contaminationLevelId).value
-            this.precipitationIntensity = FC_RAIN_BASE.find(t => t.id == data.precipitationIntensityId).value
+            this.contaminationLevel =  data?.contaminationLevelId ? CONTAMINATION_LEVEL_BASE.find(t => t.id == data?.contaminationLevelId).value : null
+            this.precipitationIntensity = data?.precipitationIntensityId ? FC_RAIN_BASE.find(t => t.id == data?.precipitationIntensityId).value : null
          })
 
          this.storageService.mechanicalCalculation.subscribe(data => {
-            this.windSpeed = data.windSpeed
-            this.chainHardwareWeight = data.chainHardwareWeight
-            this.conductorsPerPhaseNumber = data.conductorsPerPhaseNumber
-            this.verticalStressTransmitted = data.verticalStressTransmitted
-            this.maximumHorizontalTension = data.maximumHorizontalTension
+            this.windSpeed = data?.windSpeed
+            this.chainHardwareWeight = data?.chainHardwareWeight
+            this.conductorsPerPhaseNumber = data?.conductorsPerPhaseNumber
+            this.verticalStressTransmitted = data?.verticalStressTransmitted
+            this.maximumHorizontalTension = data?.maximumHorizontalTension
          })
 
          this.storageService.insulatorData.subscribe(data => {
-            this.insulatorTypeValue = INSULATOR_DATA_BASE.find(t => t.id == data.insulatorTypeId).value
+            this.insulatorTypeValue = data?.insulatorTypeId ? INSULATOR_DATA_BASE.find(t => t.id == data?.insulatorTypeId).value : null
 
-            const foundInstanceInsulatorCode = INSULATOR_DATA_BASE.find(t => t.id == data.insulatorTypeId).codes.find(m => m.id == data.insulatorCodeId)
-            this.insulatorCodeLabel = foundInstanceInsulatorCode.name
-            this.electricCharge = foundInstanceInsulatorCode.electricCharge
-            this.creepageDistance = foundInstanceInsulatorCode.creepageDistance
-            this.step = foundInstanceInsulatorCode.step
-            this.diameter = foundInstanceInsulatorCode.diameter
-            this.TF_Dry = foundInstanceInsulatorCode.TF_Dry
-            this.TF_Rain = foundInstanceInsulatorCode.TF_Rain
-            this.TF_Ray = foundInstanceInsulatorCode.TF_Ray
-            this.insulatorWeight = foundInstanceInsulatorCode.insulatorWeight
+            const foundInstanceInsulatorCode = data?.insulatorTypeId && data?.insulatorCodeId ? INSULATOR_DATA_BASE.find(t => t.id == data?.insulatorTypeId).codes.find(m => m.id == data?.insulatorCodeId) : null
+            this.insulatorCodeLabel = foundInstanceInsulatorCode?.name
+            this.electricCharge = foundInstanceInsulatorCode?.electricCharge
+            this.creepageDistance = foundInstanceInsulatorCode?.creepageDistance
+            this.step = foundInstanceInsulatorCode?.step
+            this.diameter = foundInstanceInsulatorCode?.diameter
+            this.TF_Dry = foundInstanceInsulatorCode?.TF_Dry
+            this.TF_Rain = foundInstanceInsulatorCode?.TF_Rain
+            this.TF_Ray = foundInstanceInsulatorCode?.TF_Ray
+            this.insulatorWeight = foundInstanceInsulatorCode?.insulatorWeight
+
+            console.log(this)
          })
    }
 
@@ -290,12 +292,13 @@ export class ProcessService {
       W_Numerator / W_Denominator;
 
     if (
-      V * 0 > this.TCF_RayTypeImpulse &&
+      V * this.TF_Ray > this.TCF_RayTypeImpulse &&
       V * this.TF_Dry > this.TCF_EvaluationByManeuverOrIndustrialFrequency &&
       V * this.TF_Rain > this.TCF_EvaluationByManeuverOrIndustrialFrequency
     ) {
       return V;
     } else {
+      console.log(this)
       throw new Error('Aumentar la cantidad de aisladores');
     }
   }
@@ -349,6 +352,18 @@ export class ProcessService {
         Math.pow(this.windSpeed / FORTH_TEMP_CONSTANT, FIFTH_TEMP_CONSTANT) *
         (this.diameter / SIXTH_TEMP_CONSTANT) *
         this.chainLength;
+
+
+        console.log(this)
+        // console.log(safetyCoefficientAgainstInsulatorBreakageForNormal)
+        // console.log(safetyCoefficientAgainstInsulatorBreakageForAbnormalLoads)
+        // console.log(chainLength)
+        // console.log(chainWeightWithInsulatorsAndHardware)
+        // console.log(chainWeight)
+        // console.log(windStressOnChain)
+        // console.log(TCF_EvaluationByManeuverOrIndustrialFrequency)
+        // console.log(TCF_RayTypeImpulse)
+        // console.log(insulatorsNeededResult)
     } else {
       throw new Error(
         'Aumentar el valor de la Carga Electrica (I) y cambiar el modelo de mayor carga'

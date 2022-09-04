@@ -223,5 +223,7 @@ export class StorageService {
     this.mechanicalCalculationIsComplete$.next(false);
     this.insulatorDataIsComplete$.next(false);
     this.lineTransmissionDataIsComplete$.next(false);
+
+    localStorage.clear()
   }
 }
