@@ -3,9 +3,9 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { ProcessService } from 'src/app/core/services/process.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { File, IWriteOptions } from '@ionic-native/file/ngx';
 import JSPDF from 'jspdf';
 import domtoimage from 'dom-to-image';
+import { File, Entry } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-main',
@@ -23,8 +23,8 @@ export class MainPageComponent implements OnInit {
     private alertController: AlertController,
     private readonly processService: ProcessService,
     private toastController: ToastController,
-    private file: File,
-    private fileOpener: FileOpener
+    private fileOpener: FileOpener,
+    private file: File
   ) {
     this.storageService.geographicalDataIsComplete.subscribe((data) => {
       this.isFirstComplete = data;
@@ -70,6 +70,30 @@ export class MainPageComponent implements OnInit {
   }
 
   async testPdf() {
+    try {
+      const toast = await this.toastController.create({
+        message: this.file.dataDirectory,
+        duration: 3000,
+        position: 'bottom',
+        buttons: [
+          {
+            text: 'Cerrar',
+            role: 'cancel',
+          },
+        ],
+      });
+
+      await toast.present();
+      this.file.writeExistingFile(
+        this.file.dataDirectory,
+        'access.log',
+        'Hola mundo'
+      );
+    } catch (e) {
+      console.log(e);
+    }
+
+    return;
     const pdfBlock = document.getElementById('print-wrapper');
 
     const options = {
@@ -96,13 +120,13 @@ export class MainPageComponent implements OnInit {
     const directory = this.file.dataDirectory;
     const fileName = 'user-data.pdf';
 
-    let optionsTwo: IWriteOptions = {
+    let optionsTwo = {
       replace: true,
     };
 
-    console.log(this.file)
+    console.log(this.file);
 
-    console.log(directory)
+    console.log(directory);
 
     const booleanResult = await this.file.checkFile(directory, fileName);
 

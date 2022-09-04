@@ -11,6 +11,8 @@ import { ModulePageRoutingModule } from './modules-routing.module';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 
+
+
 @NgModule({
   imports: [
     CommonModule,
