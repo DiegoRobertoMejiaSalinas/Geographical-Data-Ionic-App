@@ -2,6 +2,7 @@ export const INSULATOR_DATA_BASE = [
     {
       name: 'Esférico',
       id: 1,
+      value: 0.8,
       codes: [
         {
           id: 1,
@@ -56,6 +57,7 @@ export const INSULATOR_DATA_BASE = [
     {
       name: 'Estándar',
       id: 2,
+      value: 0.5,
       codes: [
         {
           id: 5,
@@ -398,6 +400,7 @@ export const INSULATOR_DATA_BASE = [
     {
       name: 'Anticontaminación',
       id: 3,
+      value: 0.8,
       codes: [
         {
           id: 33,
@@ -692,6 +695,7 @@ export const INSULATOR_DATA_BASE = [
     {
       name: 'Aerodinámico',
       id: 4,
+      value: 0.8,
       codes: [
         {
           id: 57,
