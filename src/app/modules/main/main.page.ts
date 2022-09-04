@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProcessService } from 'src/app/core/services/process.service';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import JSPDF from 'jspdf';
 import domtoimage from 'dom-to-image';
 import { File, Entry } from '@ionic-native/file/ngx';
