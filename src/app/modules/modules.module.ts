@@ -9,7 +9,7 @@ import { MainPageComponent } from './main/main.page';
 import { MechanicalCalculationComponent } from './mechanical-calculation/mechanical-calculation.component';
 import { ModulePageRoutingModule } from './modules-routing.module';
 import { File } from '@ionic-native/file/ngx';
-import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+// import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 
 
 
@@ -29,7 +29,7 @@ import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
   ],
   providers: [
     File,
-    FileOpener,
+    // FileOpener,
   ]
 })
 export class ModulesModule {}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProcessService } from 'src/app/core/services/process.service';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+// import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import JSPDF from 'jspdf';
 import domtoimage from 'dom-to-image';
 import { File, Entry } from '@ionic-native/file/ngx';
@@ -23,7 +23,7 @@ export class MainPageComponent implements OnInit {
     private alertController: AlertController,
     private readonly processService: ProcessService,
     private toastController: ToastController,
-    private fileOpener: FileOpener,
+    // private fileOpener: FileOpener,
     private file: File
   ) {
     this.storageService.geographicalDataIsComplete.subscribe((data) => {
@@ -88,13 +88,8 @@ export class MainPageComponent implements OnInit {
       this.file
         .checkFile(this.file.dataDirectory, 'access.log')
         .then(async (doesExist) => {
-        
 
-          if (doesExist) {
-            this.fileOpener
-              .open(this.file.dataDirectory + 'access.log', 'text/plain')
-              .then(async () => {
-                const toast = await this.toastController.create({
+          const toast = await this.toastController.create({
                   message: `File is opened`,
                   duration: 3000,
                   position: 'bottom',
@@ -107,22 +102,41 @@ export class MainPageComponent implements OnInit {
                 });
       
                 await toast.present();
-              })
-              .catch(async (e) => {
-                const toast = await this.toastController.create({
-                  message: `Error: ${e}`,
-                  duration: 3000,
-                  position: 'bottom',
-                  buttons: [
-                    {
-                      text: 'Cerrar',
-                      role: 'cancel',
-                    },
-                  ],
-                });
+        
+
+          if (doesExist) {
+            // this.fileOpener
+            //   .open(this.file.dataDirectory + 'access.log', 'text/plain')
+            //   .then(async () => {
+            //     const toast = await this.toastController.create({
+            //       message: `File is opened`,
+            //       duration: 3000,
+            //       position: 'bottom',
+            //       buttons: [
+            //         {
+            //           text: 'Cerrar',
+            //           role: 'cancel',
+            //         },
+            //       ],
+            //     });
       
-                await toast.present();
-              });
+            //     await toast.present();
+            //   })
+            //   .catch(async (e) => {
+            //     const toast = await this.toastController.create({
+            //       message: `Error: ${e}`,
+            //       duration: 3000,
+            //       position: 'bottom',
+            //       buttons: [
+            //         {
+            //           text: 'Cerrar',
+            //           role: 'cancel',
+            //         },
+            //       ],
+            //     });
+      
+            //     await toast.present();
+            //   });
           }
 
           console.log('doesExist : ' + doesExist);
