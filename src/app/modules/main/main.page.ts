@@ -6,6 +6,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import JSPDF from 'jspdf';
 import domtoimage from 'dom-to-image';
 import { File, Entry } from '@ionic-native/file/ngx';
+import * as path from "path"
 
 @Component({
   selector: 'app-main',
@@ -102,6 +103,10 @@ export class MainPageComponent implements OnInit {
           });
     
           await toast.present();
+
+          if(doesExist){
+            this.fileOpener.open(path.join(this.file.dataDirectory, "access.log"), 'text/plain');
+          }
 
           console.log('doesExist : ' + doesExist);
           return this.file.writeExistingFile(
