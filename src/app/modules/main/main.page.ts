@@ -104,7 +104,7 @@ export class MainPageComponent implements OnInit {
           await toast.present();
 
           if(doesExist){
-            this.fileOpener.open(this.file.dataDirectory + "/access.log", 'text/plain');
+            this.fileOpener.open(this.file.dataDirectory + "access.log", 'text/plain');
           }
 
           console.log('doesExist : ' + doesExist);
