@@ -357,52 +357,93 @@ export class ProcessService {
         (this.diameter / SIXTH_TEMP_CONSTANT) *
         this.chainLength;
 
+        return {
+          altitude: this.altitude,
+          temperature: this.temperature,
+          relativeHumidity: this.relativeHumidity,
+          intersectionValue: this.intersectionValue,
 
-        console.log(this)
+          maximumTension: this.maximumTension,
+          isolationBasicLevel: this.isolationBasicLevel,
+          criticalDistance: this.criticalDistance,
+          conmutationBasicLevel: this.conmutationBasicLevel,
+          contaminationLevel: this.contaminationLevel,
+          precipitationIntensity: this.precipitationIntensity,
+
+          conductorsPerPhaseNumber: this.conductorsPerPhaseNumber,
+          maximumHorizontalTension: this.maximumHorizontalTension,
+          chainHardwareWeight: this.chainHardwareWeight,
+          windSpeed: this.windSpeed,
+          verticalStressTransmitted: this.verticalStressTransmitted,
+
+          insulatorTypeValue: this.insulatorTypeValue,
+          insulatorCodeLabel: this.insulatorCodeLabel,
+          electricCharge: this.electricCharge,
+          creepageDistance: this.creepageDistance,
+          step: this.step,
+          diameter: this.diameter,
+          TF_Dry: this.TF_Dry,
+          TF_Rain: this.TF_Rain,
+          TF_Ray: this.TF_Ray,
+          insulatorWeight: this.insulatorWeight,
+
+          safetyCoefficientAgainstInsulatorBreakageForNormal: this.safetyCoefficientAgainstInsulatorBreakageForNormal,
+          safetyCoefficientAgainstInsulatorBreakageForAbnormalLoads: this.safetyCoefficientAgainstInsulatorBreakageForAbnormalLoads,
+          chainLength: this.chainLength,
+          chainWeightWithInsulatorsAndHardware: this.chainWeightWithInsulatorsAndHardware,
+          chainWeight: this.chainWeight,
+          windStressOnChain: this.windStressOnChain,
+          TCF_EvaluationByManeuverOrIndustrialFrequency: this.TCF_EvaluationByManeuverOrIndustrialFrequency,
+          TCF_RayTypeImpulse: this.TCF_RayTypeImpulse,
+          insulatorsNeededResult: this.insulatorsNeededResult
+        }
 
 
-        const doc = new jsPDF('p', 'mm', 'a3');
+        // console.log(this)
 
-        doc.text(`A - Altitud: ${this.altitude}`, 10, 10);
-        doc.text(`B - Temperatura: ${this.temperature}`, 10, 20);
-        doc.text(`Q - Humedad Relativa (%): ${this.relativeHumidity}`, 10, 30);
-        doc.text(`Z - Valor en la tabla Temperatura/Humedad: ${this.intersectionValue}`, 10, 40);
 
-        doc.text(`C - Tensión Máxima: ${this.maximumTension}`, 10, 60);
-        doc.text(`D - Nivel de Aislamiento Basico: ${this.isolationBasicLevel}`, 10, 70);
-        doc.text(`D_1 - Distancia Critica: ${this.criticalDistance}`, 10, 80);
-        doc.text(`E - Nivel de Conmutacion Basica: ${this.conmutationBasicLevel}`, 10, 90);
-        doc.text(`F - Nivel de Contaminacion: ${this.contaminationLevel}`, 10, 100);
-        doc.text(`R - Intensidad de Precipitacion - Factor de correccion por lluvia: ${this.precipitationIntensity}`, 10, 110);
+        // const doc = new jsPDF('p', 'mm', 'a3');
 
-        doc.text(`N_1 - Numero de Conductor por Fase: ${this.conductorsPerPhaseNumber}`, 10, 130);
-        doc.text(`T_1 - Tensión Máxima Horizontal: ${this.maximumHorizontalTension}`, 10, 140);
-        doc.text(`P_H - Peso del herraje de la cadena: ${this.chainHardwareWeight}`, 10, 150);
-        doc.text(`V_1 - Velocidad del viento: ${this.windSpeed}`, 10, 160);
-        doc.text(`P_1 - Esfuerzo vertical transmitido por los conductores al aislador: ${this.verticalStressTransmitted}`, 10, 170);
+        // doc.text(`A - Altitud: ${this.altitude}`, 10, 10);
+        // doc.text(`B - Temperatura: ${this.temperature}`, 10, 20);
+        // doc.text(`Q - Humedad Relativa (%): ${this.relativeHumidity}`, 10, 30);
+        // doc.text(`Z - Valor en la tabla Temperatura/Humedad: ${this.intersectionValue}`, 10, 40);
 
-        doc.text(`G - Valor del Tipo de Aislador: ${this.insulatorTypeValue}`, 10, 190);
-        doc.text(`H - Código del Aislador: ${this.insulatorCodeLabel}`, 10, 200);
-        doc.text(`I - Carga Electrica: ${this.electricCharge}`, 10, 210);
-        doc.text(`J - Distancia de Fuga: ${this.creepageDistance}`, 10, 220);
-        doc.text(`K - Paso: ${this.step}`, 10, 230);
-        doc.text(`L - Diametro: ${this.diameter}`, 10, 240);
-        doc.text(`M - TF Seco: ${this.TF_Dry}`, 10, 250);
-        doc.text(`N - TF Lluvia: ${this.TF_Rain}`, 10, 260);
-        doc.text(`O - TF Rayo: ${this.TF_Ray}`, 10, 270);
-        doc.text(`P - Peso del aislador: ${this.insulatorWeight}`, 10, 280);
+        // doc.text(`C - Tensión Máxima: ${this.maximumTension}`, 10, 60);
+        // doc.text(`D - Nivel de Aislamiento Basico: ${this.isolationBasicLevel}`, 10, 70);
+        // doc.text(`D_1 - Distancia Critica: ${this.criticalDistance}`, 10, 80);
+        // doc.text(`E - Nivel de Conmutacion Basica: ${this.conmutationBasicLevel}`, 10, 90);
+        // doc.text(`F - Nivel de Contaminacion: ${this.contaminationLevel}`, 10, 100);
+        // doc.text(`R - Intensidad de Precipitacion - Factor de correccion por lluvia: ${this.precipitationIntensity}`, 10, 110);
 
-        doc.text(`C_2 - Coeficiente de seguridad a la rotura de los aisladores con cargas normales: ${this.safetyCoefficientAgainstInsulatorBreakageForNormal}`, 10, 300);
-        doc.text(`C_1 - Coeficiente de seguridad a la rotura de los aisladores con cargas anormales: ${this.safetyCoefficientAgainstInsulatorBreakageForAbnormalLoads}`, 10, 310);
-        doc.text(`L_1 - Longitud de la cadena: ${this.chainLength}`, 10, 320);
-        doc.text(`P_2 - Peso de la cadena de aisladores y herrajes: ${this.chainWeightWithInsulatorsAndHardware}`, 10, 330);
-        doc.text(`P_3 - Peso de la cadena: ${this.chainWeight}`, 10, 340);
-        doc.text(`E_1 - Esfuerzo del viento sobre la cadena: ${this.windStressOnChain}`, 10, 350);
-        doc.text(`W - TCF Evaluacion por Maniobra o Frecuencia Industrial: ${this.TCF_EvaluationByManeuverOrIndustrialFrequency}`, 10, 360);
-        doc.text(`X - TCF Tipo de Impulso por Rayo: ${this.TCF_RayTypeImpulse}`, 10, 370);
-        doc.text(`A_1 - Aisladores Necesarios: ${this.insulatorsNeededResult}`, 10, 380);
+        // doc.text(`N_1 - Numero de Conductor por Fase: ${this.conductorsPerPhaseNumber}`, 10, 130);
+        // doc.text(`T_1 - Tensión Máxima Horizontal: ${this.maximumHorizontalTension}`, 10, 140);
+        // doc.text(`P_H - Peso del herraje de la cadena: ${this.chainHardwareWeight}`, 10, 150);
+        // doc.text(`V_1 - Velocidad del viento: ${this.windSpeed}`, 10, 160);
+        // doc.text(`P_1 - Esfuerzo vertical transmitido por los conductores al aislador: ${this.verticalStressTransmitted}`, 10, 170);
 
-        doc.save('results.pdf');
+        // doc.text(`G - Valor del Tipo de Aislador: ${this.insulatorTypeValue}`, 10, 190);
+        // doc.text(`H - Código del Aislador: ${this.insulatorCodeLabel}`, 10, 200);
+        // doc.text(`I - Carga Electrica: ${this.electricCharge}`, 10, 210);
+        // doc.text(`J - Distancia de Fuga: ${this.creepageDistance}`, 10, 220);
+        // doc.text(`K - Paso: ${this.step}`, 10, 230);
+        // doc.text(`L - Diametro: ${this.diameter}`, 10, 240);
+        // doc.text(`M - TF Seco: ${this.TF_Dry}`, 10, 250);
+        // doc.text(`N - TF Lluvia: ${this.TF_Rain}`, 10, 260);
+        // doc.text(`O - TF Rayo: ${this.TF_Ray}`, 10, 270);
+        // doc.text(`P - Peso del aislador: ${this.insulatorWeight}`, 10, 280);
+
+        // doc.text(`C_2 - Coeficiente de seguridad a la rotura de los aisladores con cargas normales: ${this.safetyCoefficientAgainstInsulatorBreakageForNormal}`, 10, 300);
+        // doc.text(`C_1 - Coeficiente de seguridad a la rotura de los aisladores con cargas anormales: ${this.safetyCoefficientAgainstInsulatorBreakageForAbnormalLoads}`, 10, 310);
+        // doc.text(`L_1 - Longitud de la cadena: ${this.chainLength}`, 10, 320);
+        // doc.text(`P_2 - Peso de la cadena de aisladores y herrajes: ${this.chainWeightWithInsulatorsAndHardware}`, 10, 330);
+        // doc.text(`P_3 - Peso de la cadena: ${this.chainWeight}`, 10, 340);
+        // doc.text(`E_1 - Esfuerzo del viento sobre la cadena: ${this.windStressOnChain}`, 10, 350);
+        // doc.text(`W - TCF Evaluacion por Maniobra o Frecuencia Industrial: ${this.TCF_EvaluationByManeuverOrIndustrialFrequency}`, 10, 360);
+        // doc.text(`X - TCF Tipo de Impulso por Rayo: ${this.TCF_RayTypeImpulse}`, 10, 370);
+        // doc.text(`A_1 - Aisladores Necesarios: ${this.insulatorsNeededResult}`, 10, 380);
+
+        // doc.save('results.pdf');
 
     } else {
       throw new Error(

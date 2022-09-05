@@ -8,6 +8,9 @@ import { LineTransmissionDataComponent } from './line-transmission-data/line-tra
 import { MainPageComponent } from './main/main.page';
 import { MechanicalCalculationComponent } from './mechanical-calculation/mechanical-calculation.component';
 import { ModulePageRoutingModule } from './modules-routing.module';
+// import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+// import { File, FileWriter } from '@awesome-cordova-plugins/file/ngx';
+
 
 @NgModule({
   imports: [
@@ -23,5 +26,9 @@ import { ModulePageRoutingModule } from './modules-routing.module';
     InsulatorDataComponent,
     LineTransmissionDataComponent,
   ],
+  providers: [
+    // FileOpener,
+    // File
+  ]
 })
 export class ModulesModule {}
