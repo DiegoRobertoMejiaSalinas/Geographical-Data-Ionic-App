@@ -8,6 +8,8 @@ import { LineTransmissionDataComponent } from './line-transmission-data/line-tra
 import { MainPageComponent } from './main/main.page';
 import { MechanicalCalculationComponent } from './mechanical-calculation/mechanical-calculation.component';
 import { ModulePageRoutingModule } from './modules-routing.module';
+import { PDFGenerator } from '@ionic-native/pdf-generator/ngx';
+import { PreviewPageComponent } from './preview/preview.page';
 // import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 // import { File, FileWriter } from '@awesome-cordova-plugins/file/ngx';
 
@@ -25,8 +27,10 @@ import { ModulePageRoutingModule } from './modules-routing.module';
     MechanicalCalculationComponent,
     InsulatorDataComponent,
     LineTransmissionDataComponent,
+    PreviewPageComponent
   ],
   providers: [
+    PDFGenerator,
     // FileOpener,
     // File
   ]
