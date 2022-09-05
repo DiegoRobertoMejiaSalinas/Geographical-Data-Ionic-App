@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons (click)="closeModal()" slot="start">
+      <ion-button slot="icon">
+        <ion-icon class="icon" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title-ios ion-text-capitalize"
+      >Reporte Generado</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div
+    id="PrintInvoice"
+    class="invoice-box"
+    style="
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      border: 1px solid #eee;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      font-size: 1rem;
+      line-height: 1.2rem;
+      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+      color: #555;
+    "
+  >
+    <div class="container">
+      <div
+        class="header__container"
+        style="
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <p
+          class="main__title"
+          style="text-align: center; font-weight: 700; font-size: 1.05rem"
+        >
+          UNTELS INSULATORS APPLICATION <br />RESUMEN DE RESULTADOS
+        </p>
+      </div>
+      <div class="first__block block">
+        <p class="title" style="margin-bottom: 10px; font-weight: 600">
+          1) DATOS GEOGRÁFICOS DE LA ZONA
+        </p>
+        <p>TEMPERATURA: {{data.temperature}} °C</p>
+        <p>ALTURA (m.s.n.m.): {{data.altitude}}</p>
+      </div>
+
+      <br />
+      <div class="second__block block">
+        <p class="title" style="margin-bottom: 10px; font-weight: 600">
+          1.1) DATOS DE LA LÍNEA DE TRANSMISIÓN
+        </p>
+
+        <p>TENSIÓN MÁXIMA: {{data.maximumTension}}</p>
+        <p>NÚMERO DE CONDUCTORES POR FASE: {{data.conductorsPerPhaseNumber}}</p>
+      </div>
+
+      <br />
+      <div class="third__block block">
+        <p class="title" style="margin-bottom: 10px; font-weight: 600">
+          1.2) DATOS DEL AISLADOR
+        </p>
+
+        <p>CARGA DE ROTURA DEL AISLADOR: {{data.electricCharge}} daN</p>
+
+        <p>TIPO DE PERFIL: {{data.insulatorTypeLabel}}</p>
+
+        <p>DISTANCIA DE FUGA: {{data.creepageDistance}}</p>
+        <p>PASO DEL AISLADOR: {{data.step}}</p>
+        <p>DIAMETRO DEL AISLADOR: {{data.diameter}}</p>
+      </div>
+
+      <br />
+      <div class="forth__block block">
+        <p class="title" style="margin-bottom: 10px; font-weight: 600">
+          1.3) DATOS MECÁNICOS
+        </p>
+
+        <p>PESO DEL HERRAJE: {{data.chainHardwareWeight}}</p>
+      </div>
+
+      <br />
+      <div class="fifth__block block">
+        <p class="title" style="margin-bottom: 10px; font-weight: 600">
+          1.4) DATOS CLIMÁTICOS
+        </p>
+
+        <p>HUMEDAD RELATIVA: {{data.relativeHumidity}}%</p>
+        <p>FACTOR DE CORRECCIÓN POR LLUVIA: {{data.precipitationIntensityLabel}}</p>
+        <p>FACTOR DE CORRECCIÓN POR HUMEDAD: {{data.intersectionValue.toFixed(4)}}</p>
+      </div>
+
+      <br />
+
+      <div class="sixth__block block">
+        <p class="title" style="margin-bottom: 10px; font-weight: 600">
+          2) RESULTADOS DE CÁLCULO
+        </p>
+
+        <p>
+          EVALUACIÓN DEL (CSMV):
+          {{data.safetyCoefficientAgainstInsulatorBreakageForNormal.toFixed(4)}}
+        </p>
+        <p>
+          EVALUACIÓN DEL (CSMH):
+          {{data.safetyCoefficientAgainstInsulatorBreakageForAbnormalLoads.toFixed(4)}}
+        </p>
+        <p>LONGITUD DE LA CADENA (LCA): {{data.chainLength}}</p>
+        <p>PESO DE LA CADENA (PCA): {{data.chainWeight}}</p>
+        <p>ESFUERZO DEL VIENTO EN LA CADENA: {{data.windStressOnChain.toFixed(4)}} daN</p>
+        <p>
+          EVALUACIÓN POR TCF POR MANIOBRA O FRECUENCIA INDUSTRIAL:
+          {{data.TCF_EvaluationByManeuverOrIndustrialFrequency.toFixed(4)}}
+        </p>
+        <p>
+          EVALUACIÓN POR TCF POR IMPULSO TIPO RAYO: {{data.TCF_RayTypeImpulse.toFixed(4)}}
+        </p>
+        <p>
+          NÚMERO DE AISLADORES RESULTANTE: {{data.insulatorsNeededResult}}
+          aisladores
+        </p>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer (click)="downloadInvoice()">
+  <ion-toolbar color="success" class="ion-padding-horizontal">
+    <div class="ion-text-center">
+      <h4 class="ion-no-margin">Descargar Reporte</h4>
+    </div>
+  </ion-toolbar>
+</ion-footer>
